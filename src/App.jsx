@@ -8,10 +8,12 @@ import Shipments from "./pages/Shipments";
 import Tracking from "./pages/Tracking";
 import TrackingHistory from "./pages/TrackingHistory";
 import Warehouses from "./pages/Warehouses";
-import Deliveries from "./pages/deliveries";
+import Deliveries from "./pages/Deliveries";
 import Reports from "./pages/Reports";
 import RoutesPage from "./pages/Routes";
 import DeliveryProof from "./pages/DeliveryProof";
+import ShipmentSearch from "./pages/ShipmentSearch";
+import Header from "./pages/Header";
 
 
 function App() {
@@ -19,6 +21,7 @@ function App() {
 
   return (
     <BrowserRouter>
+     <Header />
       <Routes>
         <Route
           path="/"
@@ -83,6 +86,12 @@ function App() {
                    :<Navigate to="/track" />
                    }
                    />
+
+          <Route path="/shipment-search"
+                 element={user?.role === "ADMIN" ? <ShipmentSearch />
+                  :<Navigate to="/track" />
+                 }
+                 />
 
             <Route path="/track" element={<Tracking />} />     
 

@@ -4,6 +4,8 @@ function RoutesPage() {
 
   const [routes, setRoutes] = useState([]);
 
+  const [shipmentId, setShipmentId]= useState("");
+
   const [form, setForm] = useState({
     routeName: "",
     source: "",
@@ -85,7 +87,7 @@ function RoutesPage() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getToken()}`
         },
-        body: JSON.stringify(form)
+        body: JSON.stringify({...form,shipmentId:shipmentId})
       });
 
       if (!response.ok) {
@@ -201,6 +203,14 @@ function RoutesPage() {
       </h2>
 
       <form onSubmit={handleSubmit}>
+
+        <input
+          type="text"
+          placeholder="Shipment ID"
+          value={shipmentId}
+          onChange={(e) => setShipmentId(e.target.value)}
+         required
+         />
 
         <input
           type="text"

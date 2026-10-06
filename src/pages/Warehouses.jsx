@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 function Warehouses() {
 
+  const [shipmentId, setShipmentId] = useState("");
   const [warehouses, setWarehouses] = useState([]);
   const [message, setMessage] = useState("");
 
@@ -82,6 +83,7 @@ function Warehouses() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            shipmentId,
             warehouseName,
             location,
             managerName,
@@ -115,6 +117,7 @@ function Warehouses() {
 
     setEditingWarehouseId(warehouse.id);
 
+    setShipmentId(warehouse.shipmentId);
     setWarehouseName(warehouse.warehouseName);
     setLocation(warehouse.location);
     setManagerName(warehouse.managerName);
@@ -143,6 +146,7 @@ function Warehouses() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            shipmentId,
             warehouseName,
             location,
             managerName,
@@ -218,6 +222,7 @@ function Warehouses() {
   // Clear form
   const clearForm = () => {
 
+    setShipmentId("");
     setWarehouseName("");
     setLocation("");
     setManagerName("");
@@ -256,6 +261,22 @@ function Warehouses() {
         <form onSubmit={handleCreateWarehouse}>
 
           <h2>Create Warehouse</h2>
+
+          <div>
+             <label>Shipment ID</label><br />
+
+             <input
+                 type="text"
+                 value={shipmentId}
+                 onChange={(e) =>
+                 setShipmentId(e.target.value)
+                }
+                placeholder="Enter shipment ID"
+                required
+                 />
+           </div>
+
+          <br />
 
           <div>
             <label>Warehouse Name</label><br />
@@ -345,6 +366,21 @@ function Warehouses() {
 
           <h2>Update Warehouse</h2>
 
+           <div>
+             <label>Shipment ID</label><br />
+
+            <input
+             type="text"
+             value={shipmentId}
+              onChange={(e) =>
+              setShipmentId(e.target.value)
+             }
+              placeholder="Enter shipment ID"
+            required
+           />
+          </div>
+
+           <br />
           <div>
             <label>Warehouse Name</label><br />
 
@@ -435,6 +471,7 @@ function Warehouses() {
 
             <tr>
               <th>ID</th>
+              <th>ShipmentID</th>
               <th>Warehouse Name</th>
               <th>Location</th>
               <th>Manager</th>
@@ -451,6 +488,8 @@ function Warehouses() {
               <tr key={warehouse.id}>
 
                 <td>{warehouse.id}</td>
+
+                <td>{warehouse.shipmentId}</td>
 
                 <td>{warehouse.warehouseName}</td>
 
