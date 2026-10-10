@@ -35,15 +35,17 @@ function Tracking() {
 
     return (
         <div style={{
-            maxWidth: "700px",
-            margin: "50px auto",
-            padding: "30px",
-            fontFamily: "Arial"
-        }}>
+              maxWidth: "900px",
+              margin: "30px auto",
+              padding: "25px",
+              background: "#ffffff",
+              borderRadius: "12px",
+              boxShadow: "0 6px 20px rgba(0,0,0,0.12)"
+             }}>
 
-            <p>
+            {/* <p>
                 <a href="/login">  back to Login</a>
-            </p>
+            </p> */}
 
             <h1 style={{ textAlign: "center" }}>
                 Track Your Shipment
@@ -67,19 +69,29 @@ function Tracking() {
                         setTrackingNumber(e.target.value)
                     }
                     style={{
-                        flex: 1,
-                        padding: "12px",
-                        fontSize: "16px"
-                    }}
+                        width:'1000px',
+                          padding: "12px",
+                          border: "1px solid #ccc",
+                          borderRadius: "8px",
+                          fontSize: "15px",
+                          outline: "none"
+                          }}
                 />
 
                 <button
                     onClick={trackShipment}
-                    style={{
-                        padding: "12px 20px",
-                        fontSize: "16px",
-                        cursor: "pointer"
-                    }}
+                     style={{
+                         padding: "12px 28px",
+                         background: "#2563eb",
+                         color: "white",
+                         border: "none",
+                         borderRadius: "8px",
+                         fontSize: "15px",
+                         fontWeight: "600",
+                         cursor: "pointer",
+                         boxShadow: "0 4px 0 #1d4ed8",
+                         transition: "0.2s"
+                       }}
                 >
                     Track
                 </button>

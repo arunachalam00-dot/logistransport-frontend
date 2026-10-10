@@ -8,12 +8,13 @@ import Shipments from "./pages/Shipments";
 import Tracking from "./pages/Tracking";
 import TrackingHistory from "./pages/TrackingHistory";
 import Warehouses from "./pages/Warehouses";
-import Deliveries from "./pages/Deliveries";
+import Deliveries from"./pages/Deliveries";
 import Reports from "./pages/Reports";
 import RoutesPage from "./pages/Routes";
 import DeliveryProof from "./pages/DeliveryProof";
 import ShipmentSearch from "./pages/ShipmentSearch";
 import Header from "./pages/Header";
+
 
 
 function App() {

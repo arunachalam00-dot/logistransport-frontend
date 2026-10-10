@@ -1,73 +1,61 @@
 import { useEffect, useState } from "react";
 
 function Reports() {
-
   const [summary, setSummary] = useState(null);
   const [shipmentStatus, setShipmentStatus] = useState(null);
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const getToken = () => {
-
     const savedUser = localStorage.getItem("user");
-
-    const user = savedUser
-      ? JSON.parse(savedUser)
-      : null;
-
+    const user = savedUser ? JSON.parse(savedUser) : null;
     return user?.token;
   };
 
   const loadReports = async () => {
-
     const token = getToken();
 
+    if (!token) {
+      setMessage("Please log in to view reports.");
+      setLoading(false);
+      return;
+    }
+
     try {
+      setMessage("");
 
-      const summaryResponse = await fetch(
-        "http://localhost:8080/api/reports/summary",
-        {
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      };
+
+      const [summaryResponse, statusResponse] = await Promise.all([
+        fetch("http://localhost:8080/api/reports/summary", {
           method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+          headers,
+        }),
+        fetch("http://localhost:8080/api/reports/shipment-status", {
+          method: "GET",
+          headers,
+        }),
+      ]);
 
-      if (!summaryResponse.ok) {
-        throw new Error("Failed to load summary report");
+      if (!summaryResponse.ok || !statusResponse.ok) {
+        throw new Error("Failed to load reports. Please try again.");
       }
 
-      const summaryData = await summaryResponse.json();
+      const [summaryData, statusData] = await Promise.all([
+        summaryResponse.json(),
+        statusResponse.json(),
+      ]);
 
       setSummary(summaryData);
-
-
-      const statusResponse = await fetch(
-        "http://localhost:8080/api/reports/shipment-status",
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (!statusResponse.ok) {
-        throw new Error("Failed to load shipment status");
-      }
-
-      const statusData = await statusResponse.json();
-
       setShipmentStatus(statusData);
-
     } catch (error) {
-
-      console.error(error);
-
-      setMessage("Unable to load reports");
-
+      console.error("Report loading error:", error);
+      setMessage(error.message || "Unable to load reports.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -75,116 +63,216 @@ function Reports() {
     loadReports();
   }, []);
 
-  return (
-    <div>
+  const panelStyle = {
+    flex: "1 1 420px",
+    minWidth: 0,
+    background: "#ffffff",
+    padding: "22px",
+    border: "1px solid #cbd5e1",
+    borderRadius: "12px",
+    boxShadow: "0 5px 16px rgba(0,0,0,0.08)",
+    boxSizing: "border-box",
+  };
 
-      <h1>Reports</h1>
+  const tableStyle = {
+    width: "100%",
+    borderCollapse: "collapse",
+    border: "1px solid #cbd5e1",
+  };
+
+  const headerStyle = {
+    padding: "13px 15px",
+    border: "1px solid #cbd5e1",
+    background: "#17365d",
+    color: "#ffffff",
+    textAlign: "left",
+    fontWeight: "600",
+  };
+
+  const cellStyle = {
+    padding: "13px 15px",
+    border: "1px solid #cbd5e1",
+    color: "#334155",
+    background: "#ffffff",
+  };
+
+  const totalStyle = {
+    ...cellStyle,
+    textAlign: "center",
+    fontWeight: "700",
+    color: "#17365d",
+  };
+
+  const summaryRows = summary
+    ? [
+        ["Total Shipments", summary.totalShipments],
+        ["Total Warehouses", summary.totalWarehouses],
+        ["Total Deliveries", summary.totalDeliveries],
+        ["Total Tracking Records", summary.totalTrackingRecords],
+        ["Total Routes", summary.totalRoutes],
+        ["Total Delivery Proofs", summary.totalDeliveryProofs],
+      ]
+    : [];
+
+  const statusRows = shipmentStatus
+    ? [
+        ["Pending", shipmentStatus.pending],
+        ["Picked Up", shipmentStatus.pickedUp],
+        ["In Transit", shipmentStatus.inTransit],
+        ["Out for Delivery", shipmentStatus.outForDelivery],
+        ["Delivered", shipmentStatus.delivered],
+      ]
+    : [];
+
+  const renderTable = (firstHeading, rows) => (
+    <div style={{ width: "100%", overflowX: "auto" }}>
+      <table style={tableStyle}>
+        <thead>
+          <tr>
+            <th style={headerStyle}>{firstHeading}</th>
+            <th style={{ ...headerStyle, textAlign: "center" }}>
+              Total
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {rows.map(([label, value], index) => (
+            <tr key={label}>
+              <td
+                style={{
+                  ...cellStyle,
+                  background: index % 2 === 0 ? "#ffffff" : "#f8fafc",
+                }}
+              >
+                {label}
+              </td>
+              <td
+                style={{
+                  ...totalStyle,
+                  background: index % 2 === 0 ? "#ffffff" : "#f8fafc",
+                }}
+              >
+                {value ?? 0}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+
+  return (
+    <div
+      style={{
+        maxWidth: "1200px",
+        margin: "30px auto",
+        padding: "25px",
+        background: "#f8fafc",
+        border: "1px solid #e2e8f0",
+        borderRadius: "12px",
+        boxShadow: "0 5px 18px rgba(0,0,0,0.06)",
+        boxSizing: "border-box",
+      }}
+    >
+      <h1
+        style={{
+          textAlign: "center",
+          color: "#17365d",
+          marginTop: 0,
+          marginBottom: "30px",
+          paddingBottom: "15px",
+          borderBottom: "3px solid #17365d",
+        }}
+      >
+        Reports
+      </h1>
 
       {message && (
-        <p>{message}</p>
-      )}
-
-      {summary && (
-        <div>
-
-          <h2>Summary Report</h2>
-
-          <table border="1">
-
-            <thead>
-              <tr>
-                <th>Report</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-
-            <tbody>
-
-              <tr>
-                <td>Total Shipments</td>
-                <td>{summary.totalShipments}</td>
-              </tr>
-
-              <tr>
-                <td>Total Warehouses</td>
-                <td>{summary.totalWarehouses}</td>
-              </tr>
-
-              <tr>
-                <td>Total Deliveries</td>
-                <td>{summary.totalDeliveries}</td>
-              </tr>
-
-              <tr>
-                <td>Total Tracking Records</td>
-                <td>{summary.totalTrackingRecords}</td>
-              </tr>
-
-              <tr>
-                <td>Total Routes</td>
-                <td>{summary.totalRoutes}</td>
-              </tr>
-
-              <tr>
-                <td>Total Delivery Proofs</td>
-                <td>{summary.totalDeliveryProofs}</td>
-              </tr>
-
-            </tbody>
-
-          </table>
-
+        <div
+          role="alert"
+          style={{
+            padding: "13px",
+            marginBottom: "20px",
+            background: "#fef2f2",
+            color: "#b91c1c",
+            border: "1px solid #fecaca",
+            borderRadius: "8px",
+          }}
+        >
+          {message}
         </div>
       )}
 
-      {shipmentStatus && (
-        <div>
+      {loading && (
+        <p style={{ textAlign: "center", color: "#475569" }}>
+          Loading reports...
+        </p>
+      )}
 
-          <h2>Shipment Status Report</h2>
+      {!loading && !message && (
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "25px",
+            alignItems: "flex-start",
+          }}
+        >
+          <section style={panelStyle}>
+            <h2
+              style={{
+                textAlign: "center",
+                color: "#17365d",
+                marginTop: 0,
+                marginBottom: "20px",
+              }}
+            >
+              Summary Report
+            </h2>
 
-          <table border="1">
+            {renderTable("Report", summaryRows)}
+          </section>
 
-            <thead>
-              <tr>
-                <th>Status</th>
-                <th>Total</th>
-              </tr>
-            </thead>
+          <section style={panelStyle}>
+            <h2
+              style={{
+                textAlign: "center",
+                color: "#17365d",
+                marginTop: 0,
+                marginBottom: "20px",
+              }}
+            >
+              Shipment Status Report
+            </h2>
 
-            <tbody>
-
-              <tr>
-                <td>Pending</td>
-                <td>{shipmentStatus.pending}</td>
-              </tr>
-
-              <tr>
-                <td>Picked Up</td>
-                <td>{shipmentStatus.pickedup}</td>
-              </tr>
-
-              <tr>
-                <td>In Transit</td>
-                <td>{shipmentStatus.inTransit}</td>
-              </tr>
-
-              <tr>
-                <td>Out for Delivery</td>
-                <td>{shipmentStatus.outForDelivery}</td>
-              </tr>
-              
-              <tr>
-                <td>Delivered</td>
-                <td>{shipmentStatus.delivered}</td>
-              </tr>
-
-            </tbody>
-
-          </table>
-
+            {renderTable("Status", statusRows)}
+          </section>
         </div>
       )}
 
+      <div style={{ textAlign: "center", marginTop: "25px" }}>
+        <button
+          onClick={() => {
+            setLoading(true);
+            loadReports();
+          }}
+          disabled={loading}
+          style={{
+            padding: "11px 24px",
+            background: loading ? "#94a3b8" : "#17365d",
+            color: "#ffffff",
+            border: "none",
+            borderRadius: "7px",
+            fontSize: "15px",
+            fontWeight: "600",
+            cursor: loading ? "not-allowed" : "pointer",
+            boxShadow: "0 3px 0 #0f2744",
+          }}
+        >
+          Refresh Reports
+        </button>
+      </div>
     </div>
   );
 }

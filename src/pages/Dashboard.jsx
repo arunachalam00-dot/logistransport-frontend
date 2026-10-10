@@ -1,307 +1,13 @@
-// import { useContext, useEffect, useState } from "react";
-// import { Link } from "react-router-dom";
-// import { AuthContext } from "../context/AuthContext";
-
-// function Dashboard() {
-
-//   const { user, logout } = useContext(AuthContext);
-
-//   const [summary, setSummary] = useState(null);
-//   const [shipmentStatus, setShipmentStatus] = useState(null);
-//   const [message, setMessage] = useState("");
-
-//   const loadSummary = async () => {
-
-//     const savedUser = localStorage.getItem("user");
-
-//     const loggedInUser = savedUser
-//       ? JSON.parse(savedUser)
-//       : null;
-
-//     const token = loggedInUser?.token;
-
-//     try {
-
-//       const response = await fetch(
-//         "http://localhost:8080/api/reports/summary",
-//         {
-//           method: "GET",
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//             "Content-Type": "application/json",
-//           },
-//         }
-//       );
-
-//       if (!response.ok) {
-//         throw new Error("Failed to load dashboard");
-//       }
-
-//       const data = await response.json();
-
-//       setSummary(data);
-
-
-//       const statusResponse = await fetch(
-//         "http://localhost:8080/api/reports/shipment-status",
-//         {
-//           method: "GET",
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//             "Content-Type": "application/json",
-//           },
-//         }
-//       );
-
-//       if (!statusResponse.ok) {
-//         throw new Error("Failed to load shipment status");
-//       }
-
-//       const statusData = await statusResponse.json();
-
-//       setShipmentStatus(statusData);
-
-//     } catch (error) {
-
-//       console.error(error);
-//       setMessage("Unable to load dashboard data");
-
-//     }
-//   };
-
-//   useEffect(() => {
-
-//     if (user?.role === "ADMIN") {
-//       loadSummary();
-//     }
-
-//   }, [user]);
-
-//   return (
-//     <div>
-// {/* 
-//       <h1>Logistics & Parcel Tracking System</h1> */}
-
-//       <hr />
-
-//       {/* <nav>
-
-//         <Link to="/dashboard">Dashboard</Link>
-//         {" | "}
-//         <Link to="/shipments">Shipments</Link>
-//         {" | "}
-//         <Link to="/warehouses">Warehouses</Link>
-//         {" | "}
-//         <Link to="/deliveries">Deliveries</Link>
-//         {" | "}
-//         <Link to="/track">Tracking</Link>
-//          {" | "}
-//         <Link to="/tracking-history">Tracking History</Link>
-//         {" | "}
-//         <Link to="/reports">Reports</Link>
-//          {" | "}
-//         <Link to="/routes">Routes</Link>
-//          {" | "}
-//         <Link to="/delivery-proofs">Delivery Proof</Link>
-//          {" | "}
-//         <Link to="/shipment-search">Shipment Search</Link>
-        
-
-//       </nav> */}
-
-//       <hr />
-
-//       <h2>Dashboard</h2>
-
-//       <p>
-//         Welcome, {user?.email}
-//       </p>
-
-//       <p>
-//         Role: {user?.role}
-//       </p>
-// {/* 
-//       <button onClick={logout}>
-//         Logout
-//       </button> */}
-
-//       {message && (
-//         <p>{message}</p>
-//       )}
-
-//       {user?.role === "ADMIN" && summary && (
-
-//         <div>
-
-//           <h2>Overview</h2>
-
-//           {/* KPI CARDS */}
-
-//           <div
-//             style={{
-//               display: "flex",
-//               gap: "15px",
-//               flexWrap: "nowrap",
-//               overflowX: "auto"
-//             }}
-//           >
-
-//             <div style={{
-//               border: "1px solid #ddd",
-//               padding: "10px",
-//               minWidth: "150px",
-//               textAlign: "center"
-//             }}>
-//               <h3>Total Shipments</h3>
-//               <p>{summary.totalShipments}</p>
-//             </div>
-
-//             <div style={{
-//               border: "1px solid #ddd",
-//               padding: "10px",
-//               minWidth: "150px",
-//               textAlign: "center"
-//             }}>
-//               <h3>Total Warehouses</h3>
-//               <p>{summary.totalWarehouses}</p>
-//             </div>
-
-//             <div style={{
-//               border: "1px solid #ddd",
-//               padding: "10px",
-//               minWidth: "150px",
-//               textAlign: "center"
-//             }}>
-//               <h3>Total Deliveries</h3>
-//               <p>{summary.totalDeliveries}</p>
-//             </div>
-
-//             <div style={{
-//               border: "1px solid #ddd",
-//               padding: "10px",
-//               minWidth: "150px",
-//               textAlign: "center"
-//             }}>
-//               <h3>Total Tracking Records</h3>
-//               <p>{summary.totalTrackingRecords}</p>
-//             </div>
-
-//             <div style={{
-//               border: "1px solid #ddd",
-//               padding: "10px",
-//               minWidth: "150px",
-//               textAlign: "center"
-//             }}>
-//               <h3>Total Routes</h3>
-//               <p>{summary.totalRoutes}</p>
-//             </div>
-
-//             <div style={{
-//               border: "1px solid #ddd",
-//               padding: "10px",
-//               minWidth: "150px",
-//               textAlign: "center"
-//             }}>
-//               <h3>Total Delivery Proofs</h3>
-//               <p>{summary.totalDeliveryProofs}</p>
-//             </div>
-
-//           </div>
-
-
-//           {/* SHIPMENT STATUS */}
-
-//           {shipmentStatus && (
-
-//             <div>
-
-//               <h2>Shipment Status</h2>
-
-//               <div
-//                 style={{
-//                   display: "flex",
-//                   gap: "15px",
-//                   flexWrap: "nowrap",
-//                   overflowX: "auto"
-//                 }}
-//               >
-
-//                 <div style={{
-//                   border: "1px solid #ddd",
-//                   padding: "10px",
-//                   minWidth: "150px",
-//                   textAlign: "center"
-//                 }}>
-//                   <h3>Pending</h3>
-//                   <p>{shipmentStatus.pending}</p>
-//                 </div>
-
-//                 <div style={{
-//                   border: "1px solid #ddd",
-//                   padding: "10px",
-//                   minWidth: "150px",
-//                   textAlign: "center"
-//                 }}>
-//                   <h3>Picked Up</h3>
-//                   <p>{shipmentStatus.pickedUp}</p>
-//                 </div>
-
-//                 <div style={{
-//                   border: "1px solid #ddd",
-//                   padding: "10px",
-//                   minWidth: "150px",
-//                   textAlign: "center"
-//                 }}>
-//                   <h3>In Transit</h3>
-//                   <p>{shipmentStatus.inTransit}</p>
-//                 </div>
-
-//                 <div style={{
-//                   border: "1px solid #ddd",
-//                   padding: "10px",
-//                   minWidth: "150px",
-//                   textAlign: "center"
-//                 }}>
-//                   <h3>Out for Delivery</h3>
-//                   <p>{shipmentStatus.outForDelivery}</p>
-//                 </div>
-
-//                 <div style={{
-//                   border: "1px solid #ddd",
-//                   padding: "10px",
-//                   minWidth: "150px",
-//                   textAlign: "center"
-//                 }}>
-//                   <h3>Delivered</h3>
-//                   <p>{shipmentStatus.delivered}</p>
-//                 </div>
-
-//               </div>
-
-//             </div>
-
-//           )}
-
-//         </div>
-
-//       )}
-
-//     </div>
-//   );
-// }
-
-// export default Dashboard;
-
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 function Dashboard() {
-
   const { user } = useContext(AuthContext);
 
   const [summary, setSummary] = useState(null);
   const [shipmentStatus, setShipmentStatus] = useState(null);
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const getToken = () => {
     const savedUser = localStorage.getItem("user");
@@ -313,221 +19,258 @@ function Dashboard() {
   };
 
   const loadDashboard = async () => {
-
     const token = getToken();
 
+    if (!token) {
+      setMessage("Please log in to view dashboard data.");
+      return;
+    }
+
+    setLoading(true);
+
     try {
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      };
 
-      const response = await fetch(
-        "http://localhost:8080/api/reports/summary",
-        {
+      const [summaryResponse, statusResponse] = await Promise.all([
+        fetch("http://localhost:8080/api/reports/summary", {
           method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
-          }
-        }
-      );
+          headers,
+        }),
+        fetch("http://localhost:8080/api/reports/shipment-status", {
+          method: "GET",
+          headers,
+        }),
+      ]);
 
-      if (!response.ok) {
-        throw new Error("Failed to load dashboard");
+      if (!summaryResponse.ok || !statusResponse.ok) {
+        throw new Error("Failed to load dashboard data.");
       }
 
-      const summaryData = await response.json();
+      const [summaryData, statusData] = await Promise.all([
+        summaryResponse.json(),
+        statusResponse.json(),
+      ]);
 
       setSummary(summaryData);
-
-      const statusResponse = await fetch(
-        "http://localhost:8080/api/reports/shipment-status",
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
-          }
-        }
-      );
-
-      if (!statusResponse.ok) {
-        throw new Error("Failed to load shipment status");
-      }
-
-      const statusData = await statusResponse.json();
-
       setShipmentStatus(statusData);
-
       setMessage("");
-
     } catch (error) {
-
-      console.error(error);
-      setMessage("Unable to load dashboard data");
-
+      console.error("Dashboard loading error:", error);
+      setMessage("Unable to load dashboard data.");
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-
     if (user?.role === "ADMIN") {
       loadDashboard();
     }
-
   }, [user]);
 
+  const summaryCards = summary
+    ? [
+        ["Total Shipments", summary.totalShipments],
+        ["Total Warehouses", summary.totalWarehouses],
+        ["Total Deliveries", summary.totalDeliveries],
+        ["Total Tracking Records", summary.totalTrackingRecords],
+        ["Total Routes", summary.totalRoutes],
+        ["Total Delivery Proofs", summary.totalDeliveryProofs],
+      ]
+    : [];
+
+  const statusCards = shipmentStatus
+    ? [
+        ["Pending", shipmentStatus.pending],
+        ["Picked Up", shipmentStatus.pickedUp],
+        ["In Transit", shipmentStatus.inTransit],
+        ["Out for Delivery", shipmentStatus.outForDelivery],
+        ["Delivered", shipmentStatus.delivered],
+      ]
+    : [];
+
+  const renderCards = (cards) =>
+    cards.map(([label, value]) => (
+      <div key={label} style={cardStyle}>
+        <h3 style={cardHeadingStyle}>{label}</h3>
+        <p style={numberStyle}>{value ?? 0}</p>
+      </div>
+    ));
+
   return (
-    <div style={{ padding: "30px" }}>
+    <div style={pageStyle}>
+      <h1 style={pageHeadingStyle}>Dashboard</h1>
 
-      <h2>Dashboard</h2>
+      <div style={welcomeStyle}>
+        <p style={{ margin: "0 0 8px" }}>
+          Welcome, <strong>{user?.email}</strong>
+        </p>
 
-      <p>
-        Welcome, <strong>{user?.email}</strong>
-      </p>
-
-      <p>
-        Role: <strong>{user?.role}</strong>
-      </p>
+        <p style={{ margin: 0 }}>
+          Role: <strong>{user?.role}</strong>
+        </p>
+      </div>
 
       {message && (
-        <p>{message}</p>
+        <p role="alert" style={messageStyle}>
+          {message}
+        </p>
       )}
 
-      {user?.role === "ADMIN" && summary && (
-
-        <div>
-
-          <h2>Overview</h2>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns:
-                "repeat(auto-fit, minmax(180px, 1fr))",
-              gap: "20px"
-            }}
-          >
-
-            <div style={cardStyle}>
-              <h3>Total Shipments</h3>
-              <p style={numberStyle}>
-                {summary.totalShipments}
-              </p>
-            </div>
-
-            <div style={cardStyle}>
-              <h3>Total Warehouses</h3>
-              <p style={numberStyle}>
-                {summary.totalWarehouses}
-              </p>
-            </div>
-
-            <div style={cardStyle}>
-              <h3>Total Deliveries</h3>
-              <p style={numberStyle}>
-                {summary.totalDeliveries}
-              </p>
-            </div>
-
-            <div style={cardStyle}>
-              <h3>Total Tracking Records</h3>
-              <p style={numberStyle}>
-                {summary.totalTrackingRecords}
-              </p>
-            </div>
-
-            <div style={cardStyle}>
-              <h3>Total Routes</h3>
-              <p style={numberStyle}>
-                {summary.totalRoutes}
-              </p>
-            </div>
-
-            <div style={cardStyle}>
-              <h3>Total Delivery Proofs</h3>
-              <p style={numberStyle}>
-                {summary.totalDeliveryProofs}
-              </p>
-            </div>
-
-          </div>
-
-          {shipmentStatus && (
-
-            <div>
-
-              <h2 style={{ marginTop: "40px" }}>
-                Shipment Status
-              </h2>
-
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns:
-                    "repeat(auto-fit, minmax(180px, 1fr))",
-                  gap: "20px"
-                }}
-              >
-
-                <div style={cardStyle}>
-                  <h3>Pending</h3>
-                  <p style={numberStyle}>
-                    {shipmentStatus.pending}
-                  </p>
-                </div>
-
-                <div style={cardStyle}>
-                  <h3>Picked Up</h3>
-                  <p style={numberStyle}>
-                    {shipmentStatus.pickedUp}
-                  </p>
-                </div>
-
-                <div style={cardStyle}>
-                  <h3>In Transit</h3>
-                  <p style={numberStyle}>
-                    {shipmentStatus.inTransit}
-                  </p>
-                </div>
-
-                <div style={cardStyle}>
-                  <h3>Out for Delivery</h3>
-                  <p style={numberStyle}>
-                    {shipmentStatus.outForDelivery}
-                  </p>
-                </div>
-
-                <div style={cardStyle}>
-                  <h3>Delivered</h3>
-                  <p style={numberStyle}>
-                    {shipmentStatus.delivered}
-                  </p>
-                </div>
-
-              </div>
-
-            </div>
-
+      {user?.role === "ADMIN" && (
+        <>
+          {loading && (
+            <p style={{ textAlign: "center", color: "#475569" }}>
+              Loading dashboard...
+            </p>
           )}
 
-        </div>
+          {!loading && summary && (
+            <>
+              <section style={sectionStyle}>
+                <h2 style={sectionHeadingStyle}>Overview</h2>
 
+                <div style={gridStyle}>
+                  {renderCards(summaryCards)}
+                </div>
+              </section>
+
+              {shipmentStatus && (
+                <section style={sectionStyle}>
+                  <h2 style={sectionHeadingStyle}>
+                    Shipment Status
+                  </h2>
+
+                  <div style={gridStyle}>
+                    {renderCards(statusCards)}
+                  </div>
+                </section>
+              )}
+            </>
+          )}
+
+          {!loading && (
+            <div style={{ textAlign: "center", marginTop: "25px" }}>
+              <button
+                onClick={loadDashboard}
+                style={refreshButtonStyle}
+              >
+                Refresh Dashboard
+              </button>
+            </div>
+          )}
+        </>
       )}
 
+      {user?.role !== "ADMIN" && (
+        <div style={sectionStyle}>
+          <h2 style={sectionHeadingStyle}>Welcome to LogiTransport</h2>
+          <p style={{ color: "#475569", marginBottom: 0 }}>
+            Use Shipment Tracking to check the latest status of your parcel.
+          </p>
+        </div>
+      )}
     </div>
   );
 }
 
-const cardStyle = {
-  border: "1px solid #ddd",
-  borderRadius: "8px",
-  padding: "20px",
+const pageStyle = {
+  maxWidth: "1200px",
+  margin: "30px auto",
+  padding: "25px",
+  background: "#f8fafc",
+  border: "1px solid #e2e8f0",
+  borderRadius: "12px",
+  boxShadow: "0 5px 18px rgba(0,0,0,0.06)",
+  boxSizing: "border-box",
+};
+
+const pageHeadingStyle = {
   textAlign: "center",
-  backgroundColor: "#fff"
+  color: "#17365d",
+  marginTop: 0,
+  marginBottom: "25px",
+  paddingBottom: "15px",
+  borderBottom: "3px solid #17365d",
+};
+
+const welcomeStyle = {
+  padding: "18px 20px",
+  marginBottom: "25px",
+  background: "#ffffff",
+  border: "1px solid #cbd5e1",
+  borderRadius: "10px",
+  boxShadow: "0 3px 10px rgba(0,0,0,0.05)",
+  color: "#334155",
+};
+
+const sectionStyle = {
+  marginTop: "25px",
+  padding: "22px",
+  background: "#ffffff",
+  border: "1px solid #cbd5e1",
+  borderRadius: "12px",
+  boxShadow: "0 5px 16px rgba(0,0,0,0.07)",
+};
+
+const sectionHeadingStyle = {
+  textAlign: "center",
+  color: "#17365d",
+  marginTop: 0,
+  marginBottom: "22px",
+};
+
+const gridStyle = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+  gap: "18px",
+};
+
+const cardStyle = {
+  border: "1px solid #cbd5e1",
+  borderRadius: "10px",
+  padding: "20px 14px",
+  textAlign: "center",
+  backgroundColor: "#ffffff",
+  boxShadow: "0 3px 9px rgba(0,0,0,0.06)",
+  boxSizing: "border-box",
+};
+
+const cardHeadingStyle = {
+  color: "#17365d",
+  fontSize: "16px",
+  fontWeight: "600",
+  margin: "0 0 14px",
 };
 
 const numberStyle = {
-  fontSize: "28px",
-  fontWeight: "bold",
-  margin: "10px 0"
+  fontSize: "30px",
+  fontWeight: "700",
+  color: "#17365d",
+  margin: 0,
+};
+
+const messageStyle = {
+  padding: "12px",
+  color: "#b91c1c",
+  background: "#fef2f2",
+  border: "1px solid #fecaca",
+  borderRadius: "8px",
+};
+
+const refreshButtonStyle = {
+  padding: "12px 24px",
+  background: "#17365d",
+  color: "#ffffff",
+  border: "none",
+  borderRadius: "7px",
+  fontSize: "15px",
+  fontWeight: "600",
+  cursor: "pointer",
+  boxShadow: "0 3px 0 #0f2744",
 };
 
 export default Dashboard;
