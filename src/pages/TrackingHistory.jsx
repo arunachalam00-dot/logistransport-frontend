@@ -30,7 +30,7 @@ function TrackingHistory() {
     try {
 
       const response = await fetch(
-        "http://localhost:8080/api/tracking",
+        "https://logistransport-backend-7oqv.onrender.com/api/tracking",
         {
           headers: {
             Authorization: `Bearer ${getToken()}`
@@ -71,8 +71,8 @@ function TrackingHistory() {
     e.preventDefault();
 
     const url = editingId
-      ? `http://localhost:8080/api/tracking/${editingId}`
-      : "http://localhost:8080/api/tracking";
+      ? `https://logistransport-backend-7oqv.onrender.com/api/tracking/${editingId}`
+      : "https://logistransport-backend-7oqv.onrender.com/api/tracking";
 
     const method = editingId ? "PUT" : "POST";
 

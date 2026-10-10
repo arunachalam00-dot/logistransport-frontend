@@ -30,11 +30,11 @@ function Reports() {
       };
 
       const [summaryResponse, statusResponse] = await Promise.all([
-        fetch("http://localhost:8080/api/reports/summary", {
+        fetch("https://logistransport-backend-7oqv.onrender.com/api/reports/summary", {
           method: "GET",
           headers,
         }),
-        fetch("http://localhost:8080/api/reports/shipment-status", {
+        fetch("https://logistransport-backend-7oqv.onrender.com/api/reports/shipment-status", {
           method: "GET",
           headers,
         }),

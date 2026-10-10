@@ -14,8 +14,8 @@ function Warehouses() {
   const [managerName, setManagerName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
 
-  const API_URL = "http://localhost:8080/api/warehouses";
-  const SHIPMENT_API_URL = "http://localhost:8080/api/shipments";
+  const API_URL = "https://logistransport-backend-7oqv.onrender.com/api/warehouses";
+  const SHIPMENT_API_URL = "https://logistransport-backend-7oqv.onrender.com/api/shipments";
 
   // Get the logged-in user's JWT token
   function getToken() {

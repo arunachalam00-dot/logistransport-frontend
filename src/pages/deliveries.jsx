@@ -14,8 +14,8 @@ function Deliveries() {
   const [deliveryDate, setDeliveryDate] = useState("");
   const [status, setStatus] = useState("");
 
-  const API_URL = "http://localhost:8080/api/deliveries";
-  const SHIPMENT_API_URL = "http://localhost:8080/api/shipments";
+  const API_URL = "https://logistransport-backend-7oqv.onrender.com/api/deliveries";
+  const SHIPMENT_API_URL = "https://logistransport-backend-7oqv.onrender.com/api/shipments";
 
   // Get JWT token
   const getToken = () => {
