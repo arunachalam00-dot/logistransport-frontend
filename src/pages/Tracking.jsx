@@ -63,7 +63,7 @@ function Tracking() {
 
                 <input
                     type="text"
-                    placeholder="Enter Tracking Number"
+                    placeholder="Enter Tracking Number (e.g. TRK001)"
                     value={trackingNumber}
                     onChange={(e) =>
                         setTrackingNumber(e.target.value)

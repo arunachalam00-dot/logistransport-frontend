@@ -5,3 +5,13 @@ html{
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+
+.logoutStyle{
+    padding: 9px 18px;
+    border : 1px solid #b91c1c;
+    border-radius: 7px;
+    background: #dc2626;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+  }
