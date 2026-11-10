@@ -1,16 +1,14 @@
-import { Link, useNavigate } from "react-router-dom";
-import '../index.css';
+
+import { NavLink } from "react-router-dom";
+import "../index.css";
 
 function Header() {
-  const navigate = useNavigate();
-
   const user = JSON.parse(localStorage.getItem("user") || "null");
 
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     sessionStorage.clear();
-
     window.location.replace("/login");
   };
 
@@ -48,16 +46,15 @@ function Header() {
     borderRadius: "10px",
   };
 
-  const linkStyle = ({ isActive}) => ({
-    color: isActive ? "white" : "#17365d",
-    backgrundColour: isActive ? "green" : "#f8fafc" ,
+  const linkStyle = ({ isActive }) => ({
+    color: isActive ? "#ffffff" : "#17365d",
     textDecoration: "none",
     fontWeight: "600",
     fontSize: "14px",
     padding: "10px 12px",
     border: "1px solid #cbd5e1",
     borderRadius: "7px",
-    background: "#f8fafc",
+    background: isActive ? "#17365d" : "#f8fafc",
     whiteSpace: "nowrap",
   });
 
@@ -91,13 +88,15 @@ function Header() {
       {user && (
         <>
           <nav style={navStyle}>
-            <Link to="/dashboard" style={linkStyle}>Dashboard</Link>
-            <Link to="/shipments" style={linkStyle}>Shipments</Link>
-            <Link to="/warehouses" style={linkStyle}>Warehouses</Link>
-            <Link to="/deliveries" style={linkStyle}>Deliveries</Link>
-            <Link to="/track" style={linkStyle}>Tracking</Link>
-            <Link to="/reports" style={linkStyle}>Reports</Link>
-            <Link to="/shipment-search" style={linkStyle}>Shipment Search </Link>
+            <NavLink to="/dashboard" style={linkStyle}>Dashboard</NavLink>
+            <NavLink to="/shipments" style={linkStyle}>Shipments</NavLink>
+            <NavLink to="/warehouses" style={linkStyle}>Warehouses</NavLink>
+            <NavLink to="/deliveries" style={linkStyle}>Deliveries</NavLink>
+            <NavLink to="/track" style={linkStyle}>Tracking</NavLink>
+            <NavLink to="/reports" style={linkStyle}>Reports</NavLink>
+            <NavLink to="/shipment-search" style={linkStyle}>
+              Shipment Search
+            </NavLink>
           </nav>
 
           <div style={userPanelStyle}>
@@ -105,6 +104,7 @@ function Header() {
               <span style={{ color: "#64748b", fontSize: "13px" }}>
                 Logged in as
               </span>
+
               <p style={{
                 margin: "5px 0 0",
                 color: "#17365d",
@@ -115,7 +115,7 @@ function Header() {
               </p>
             </div>
 
-            <button className="logoutStyle" onClick={handleLogout} >
+            <button style={logoutStyle} onClick={handleLogout}>
               Logout
             </button>
           </div>

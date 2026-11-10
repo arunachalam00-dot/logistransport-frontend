@@ -36,7 +36,7 @@ function ShipmentSearch() {
 
     try {
       const response = await fetch(
-        `https://logistransport-backend-7oqv.onrender.com/api/shipments/search/${encodeURIComponent(shipmentId.trim())}`,
+        `https://logistransport-backend-hp98.onrender.com/api/shipments/search/${encodeURIComponent(shipmentId.trim())}`,
         {
           method: "GET",
           headers: {

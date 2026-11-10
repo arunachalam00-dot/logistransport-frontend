@@ -21,7 +21,7 @@ function Tracking() {
             setShipment(null);
 
             const response = await axios.get(
-                `https://logistransport-backend-7oqv.onrender.com/api/shipments/track/${trackingNumber.trim()}`
+                `https://logistransport-backend-hp98.onrender.com/api/shipments/track/${trackingNumber.trim()}`
             );
 
             setShipment(response.data);
