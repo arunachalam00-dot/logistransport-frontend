@@ -403,11 +403,7 @@ function Deliveries() {
       {showForm && (
         <form
           style={styles.form}
-          onSubmit={
-            editingDeliveryId
-              ? handleUpdateDelivery
-              : handleCreateDelivery
-          }
+          onSubmit={ editingDeliveryId ? handleUpdateDelivery : handleCreateDelivery }
         >
           <h3 style={styles.heading}>
             {editingDeliveryId

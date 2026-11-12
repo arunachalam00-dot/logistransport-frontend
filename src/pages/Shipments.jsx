@@ -12,6 +12,7 @@ function Shipments() {
   const [shipmentId, setShipmentId] = useState("");
   const [senderName, setSenderName] = useState("");
   const [receiverName, setReceiverName] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
   const [status, setStatus] = useState("");
@@ -65,6 +66,7 @@ function Shipments() {
     setShipmentId("");
     setSenderName("");
     setReceiverName("");
+    setMobileNumber("");
     setSource("");
     setDestination("");
     setStatus("");
@@ -92,6 +94,7 @@ function Shipments() {
           shipmentId,
           senderName,
           receiverName,
+          mobileNumber,
           source,
           destination,
           status,
@@ -119,6 +122,7 @@ function Shipments() {
     setShipmentId(shipment.shipmentId || "");
     setSenderName(shipment.senderName || "");
     setReceiverName(shipment.receiverName || "");
+    setMobileNumber(shipment.mobileNumber || "");
     setSource(shipment.source || "");
     setDestination(shipment.destination || "");
     setStatus(shipment.status || "");
@@ -143,6 +147,7 @@ function Shipments() {
             shipmentId,
             senderName,
             receiverName,
+            mobileNumber,
             source,
             destination,
             status,
@@ -436,6 +441,18 @@ function Shipments() {
           />
 
           <label style={styles.label}>
+            Mobile Number
+          </label>
+          <input
+            type="text"
+            value={mobileNumber}
+            onChange={(e) => setMobileNumber(e.target.value)}
+            placeholder="Enter Receiver Mobile Number"
+            required
+            style={styles.input}
+            />
+
+          <label style={styles.label}>
             Source
           </label>
           <input
@@ -514,6 +531,7 @@ function Shipments() {
                 <th style={styles.th}>Shipment ID</th>
                 <th style={styles.th}>Sender</th>
                 <th style={styles.th}>Receiver</th>
+                <th style={styles.th}>Mobile Number</th>
                 <th style={styles.th}>Source</th>
                 <th style={styles.th}>Destination</th>
                 <th style={styles.th}>Status</th>
@@ -543,6 +561,10 @@ function Shipments() {
                   <td style={styles.td}>
                     {shipment.receiverName}
                   </td>
+
+                  <td style={styles.td}>
+                    {shipment.mobileNumber}
+                    </td>
 
                   <td style={styles.td}>
                     {shipment.source}
