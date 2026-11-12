@@ -146,7 +146,7 @@ function ShipmentSearch() {
       >
         <input
           type="text"
-          placeholder="Enter Shipment ID (e.g. SID011)"
+          placeholder="Enter Shipment ID (e.g. SID001)"
           value={shipmentId}
           onChange={(e) => setShipmentId(e.target.value)}
           onKeyDown={(e) => {
@@ -208,6 +208,7 @@ function ShipmentSearch() {
             <Detail label="Tracking Number" value={shipment?.trackingNumber} />
             <Detail label="Sender" value={shipment?.senderName} />
             <Detail label="Receiver" value={shipment?.receiverName} />
+            <Detail label="Mobile Number" value={shipment?.mobileNumber} />
             <Detail label="Source" value={shipment?.source} />
             <Detail label="Destination" value={shipment?.destination} />
             <Detail label="Status" value={shipment?.status} />
