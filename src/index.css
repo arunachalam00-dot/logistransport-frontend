@@ -386,27 +386,45 @@ html{
     /*............TRACKING..............................................................*/
 
     #shipment-box{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
       max-width: 900px;
       margin: 30px auto;
       padding: 25px;
       background: #ffffff;
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      
+    }
+
+    #shipment-heading {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    #shipment-description {
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: -5px;
     }
     
     #track-div{
       display: flex;
       gap: 10px;
       margin-top: 30px;
+      width: 100%;
     }
 
     #track-search{
-      width:1000px;
+      flex: 1;
+      min-width: 0;
       padding: 12px;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 15px;
       outline: none;
+      box-sizing: border-box;
     }
 
     #track-button{
@@ -422,13 +440,40 @@ html{
       transition: 0.2s;
     }
 
-    #shipment-details{
-      margin-top: 30px;
-      padding: 25px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    #track-button:hover{
+      background: #1d4ed8;
     }
+
+    #shipment-details {
+    width:auto;
+    margin-top: 35px;
+    padding: 30px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-sizing:content-box;
+  }
+
+  #shipment-details h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #1e293b;
+  }
+
+  #shipment-details p {
+    text-align:center
+  }
+
+  #shipment-details p:last-child {
+    border-bottom: none;
+  }
+
+  #shipment-details strong {
+    display: inline-block;
+    min-width: 180px;
+    color: #1e293b;
+  }
 
     /*.............................SHIPMENT SEARCH................................................*/ 
 

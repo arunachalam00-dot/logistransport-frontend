@@ -37,11 +37,11 @@ function Tracking() {
         <div id="shipment-box">
 
 
-            <h1 style={{ textAlign: "center" }}>
+            <h1 id="shipment-heading">
                 Track Your Shipment
             </h1>
 
-            <p style={{ textAlign: "center" }}>
+            <p id="shipment-description">
                 Enter your tracking number to check shipment status
             </p>
 
