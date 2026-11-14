@@ -43,14 +43,7 @@ function Login() {
   };
 
   return (
-    <div style={{
-        marginTop:'100px',
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        textAlign: "center",
-       }}>
+    <div id="login">
 
       <h1 >Logistics & Parcel Tracking System</h1>
 
@@ -65,16 +58,8 @@ function Login() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-              style={{
-                       width: "300px",
-                       padding: "12px",
-                       border: "1px solid #cbd5e1",
-                       borderRadius: "8px",
-                       fontSize: "15px",
-                       outline: "none",
-                       boxSizing: "border-box"
-                     }}
-                required
+            id="email"
+            required
           />
         </div>
 
@@ -88,52 +73,26 @@ function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
-              style={{
-                width: "300px",
-                padding: "12px",
-                border: "1px solid #cbd5e1",
-                borderRadius: "8px",
-               fontSize: "15px",
-                outline: "none",
-               boxSizing: "border-box"
-             }}
+            id="password"
             required
           />
         </div>
 
         <br />
 
-        <button type="submit"
-                  style={{
-                           width: "300px",
-                            padding: "12px",
-                           backgroundColor: "#2563eb",
-                           color: "white",
-                           border: "none",
-                           borderRadius: "8px",
-                           fontSize: "16px",
-                           fontWeight: "bold",
-                           cursor: "pointer"
-                         }}>Login</button>
+        <button type="submit" id="login-btn">Login</button>
 
 
-       <div style={{border:'2px solid black',
-                   marginTop:'30px',
-                   padding:'0px 40px',
-                   borderRadius:"10px",
-                   backgroundColor:'white',
-                   boxShadow:'0px 20px 15px rgba(0,0,10,155)',
-                   fontWeight:'bold',
-                   }} >
-          <p>
-          <a href="/track"> Track Your Shipment</a>
-        </p>
-       </div>
+ <div id="tracking" >
+    <p>
+      <a href="/track"> Track Your Shipment</a>
+    </p>
+  </div>
         
-      </form>
+  </form>
 
-      {message && <p>{message}</p>}
-    </div>
+    {message && <p>{message}</p>}
+  </div>
   );
 }
 

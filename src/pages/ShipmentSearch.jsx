@@ -85,25 +85,9 @@ function ShipmentSearch() {
     }
   };
 
-  const cardStyle = {
-    background: "#ffffff",
-    border: "1px solid #cbd5e1",
-    borderRadius: "10px",
-    padding: "18px",
-    boxShadow: "0 3px 10px rgba(0,0,0,0.06)"
-  };
-
-  const rowStyle = {
-    display: "grid",
-    gridTemplateColumns: "minmax(130px, 180px) 1fr",
-    gap: "12px",
-    padding: "10px 0",
-    borderBottom: "1px solid #e2e8f0",
-    overflowWrap: "anywhere"
-  };
 
   const Detail = ({ label, value }) => (
-    <div style={rowStyle}>
+    <div id="row-style">
       <strong style={{ color: "#334155" }}>{label}</strong>
       <span>{value || "Not available"}</span>
     </div>
@@ -115,35 +99,12 @@ function ShipmentSearch() {
   const route = data?.route;
 
   return (
-    <div
-      style={{
-        maxWidth: "1000px",
-        margin: "30px auto",
-        padding: "25px",
-        background: "#f8fafc",
-        border: "1px solid #e2e8f0",
-        borderRadius: "12px",
-        boxShadow: "0 6px 20px rgba(0,0,0,0.10)"
-      }}
-    >
-      <h1
-        style={{
-          color: "#17365d",
-          marginTop: 0,
-          marginBottom: "22px"
-        }}
-      >
+    <div id="box1">
+      <h1 id="h1">
         Shipment Search
       </h1>
 
-      <div
-        style={{
-          display: "flex",
-          gap: "12px",
-          flexWrap: "wrap",
-          marginBottom: "18px"
-        }}
-      >
+      <div id="shipment-box">
         <input
           type="text"
           placeholder="Enter Shipment ID (e.g. SID001)"
@@ -152,32 +113,13 @@ function ShipmentSearch() {
           onKeyDown={(e) => {
             if (e.key === "Enter") searchShipment();
           }}
-          style={{
-            flex: "1 1 300px",
-            minWidth: 0,
-            padding: "12px",
-            border: "1px solid #cbd5e1",
-            borderRadius: "8px",
-            fontSize: "15px",
-            boxSizing: "border-box",
-            outlineColor: "#2563eb"
-          }}
+         id="shipment-boxx"
         />
 
         <button
           onClick={searchShipment}
           disabled={loading}
-          style={{
-            padding: "12px 28px",
-            background: loading ? "#94a3b8" : "#2563eb",
-            color: "#ffffff",
-            border: "none",
-            borderRadius: "8px",
-            fontSize: "15px",
-            fontWeight: "600",
-            cursor: loading ? "not-allowed" : "pointer",
-            boxShadow: "0 4px 0 #1d4ed8"
-          }}
+         id="search-button"
         >
           {loading ? "Searching..." : "Search"}
         </button>
@@ -186,13 +128,7 @@ function ShipmentSearch() {
       {message && (
         <p
           role="alert"
-          style={{
-            padding: "12px",
-            color: "#b91c1c",
-            background: "#fef2f2",
-            border: "1px solid #fecaca",
-            borderRadius: "8px"
-          }}
+         id="alert"
         >
           {message}
         </p>
@@ -201,7 +137,7 @@ function ShipmentSearch() {
       {data && (
         <div style={{ display: "grid", gap: "20px", marginTop: "25px" }}>
           <section style={cardStyle}>
-            <h2 style={{ color: "#17365d", marginTop: 0 }}>
+            <h2 id="h2">
               Shipment Details
             </h2>
             <Detail label="Shipment ID" value={shipment?.shipmentId} />
@@ -214,8 +150,8 @@ function ShipmentSearch() {
             <Detail label="Status" value={shipment?.status} />
           </section>
 
-          <section style={cardStyle}>
-            <h2 style={{ color: "#17365d", marginTop: 0 }}>
+          <section id="card-style">
+            <h2 id="h2">
               Delivery Partner
             </h2>
             <Detail
@@ -227,7 +163,7 @@ function ShipmentSearch() {
           </section>
 
           <section style={cardStyle}>
-            <h2 style={{ color: "#17365d", marginTop: 0 }}>Warehouse</h2>
+            <h2 id="h2">Warehouse</h2>
             <Detail
               label="Warehouse Name"
               value={warehouse?.warehouseName || "No warehouse assigned"}
@@ -236,13 +172,6 @@ function ShipmentSearch() {
             <Detail label="Manager" value={warehouse?.managerName} />
           </section>
 
-          {/* <section style={cardStyle}>
-            <h2 style={{ color: "#17365d", marginTop: 0 }}>Route</h2>
-            <Detail
-              label="Route Name"
-              value={route?.routeName || "No route assigned"}
-            />
-          </section> */}
         </div>
       )}
     </div>
