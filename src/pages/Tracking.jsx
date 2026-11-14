@@ -34,18 +34,8 @@ function Tracking() {
     };
 
     return (
-        <div style={{
-              maxWidth: "900px",
-              margin: "30px auto",
-              padding: "25px",
-              background: "#ffffff",
-              borderRadius: "12px",
-              boxShadow: "0 6px 20px rgba(0,0,0,0.12)"
-             }}>
+        <div id="shipment-box">
 
-            {/* <p>
-                <a href="/login">  back to Login</a>
-            </p> */}
 
             <h1 style={{ textAlign: "center" }}>
                 Track Your Shipment
@@ -55,11 +45,7 @@ function Tracking() {
                 Enter your tracking number to check shipment status
             </p>
 
-            <div style={{
-                display: "flex",
-                gap: "10px",
-                marginTop: "30px"
-            }}>
+            <div id="track-div">
 
                 <input
                     type="text"
@@ -68,30 +54,12 @@ function Tracking() {
                     onChange={(e) =>
                         setTrackingNumber(e.target.value)
                     }
-                    style={{
-                        width:'1000px',
-                          padding: "12px",
-                          border: "1px solid #ccc",
-                          borderRadius: "8px",
-                          fontSize: "15px",
-                          outline: "none"
-                          }}
+                    id="track-search"
                 />
 
                 <button
                     onClick={trackShipment}
-                     style={{
-                         padding: "12px 28px",
-                         background: "#2563eb",
-                         color: "white",
-                         border: "none",
-                         borderRadius: "8px",
-                         fontSize: "15px",
-                         fontWeight: "600",
-                         cursor: "pointer",
-                         boxShadow: "0 4px 0 #1d4ed8",
-                         transition: "0.2s"
-                       }}
+                    id="track-button"
                 >
                     Track
                 </button>
@@ -109,13 +77,7 @@ function Tracking() {
             )}
 
             {shipment && (
-                <div style={{
-                    marginTop: "30px",
-                    padding: "25px",
-                    border: "1px solid #ddd",
-                    borderRadius: "10px",
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
-                }}>
+                <div id="shipment-details">
 
                     <h2>Shipment Details</h2>
 

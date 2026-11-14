@@ -204,163 +204,15 @@ function Shipments() {
     setMessage("");
   };
 
-  // Styles matching Warehouse Management
-  const styles = {
-    page: {
-      padding: "25px",
-      fontFamily: "Arial, sans-serif",
-      color: "#1f2937",
-      boxSizing: "border-box",
-      width: "100%",
-    },
-
-    heading: {
-      textAlign: "center",
-      marginBottom: "25px",
-      color: "#17365d",
-    },
-
-    addButton: {
-      background: "#17365d",
-      color: "white",
-      padding: "10px 18px",
-      border: "none",
-      borderRadius: "6px",
-      cursor: "pointer",
-      marginBottom: "20px",
-      fontSize: "14px",
-      fontWeight: "bold",
-    },
-
-    form: {
-      width: "100%",
-      maxWidth: "600px",
-      boxSizing: "border-box",
-      margin: "0 auto 25px",
-      padding: "22px",
-      border: "1px solid #cbd5e1",
-      borderRadius: "10px",
-      boxShadow: "0 4px 12px rgba(0,0,0,0.10)",
-      background: "#ffffff",
-    },
-
-    label: {
-      display: "block",
-      fontWeight: "bold",
-      marginBottom: "6px",
-      marginTop: "12px",
-    },
-
-    input: {
-      width: "100%",
-      boxSizing: "border-box",
-      padding: "10px",
-      border: "1px solid #94a3b8",
-      borderRadius: "5px",
-      fontSize: "14px",
-      outline: "none",
-    },
-
-    formButtons: {
-      display: "flex",
-      flexWrap: "wrap",
-      gap: "10px",
-      marginTop: "20px",
-    },
-
-    saveButton: {
-      background: "#198754",
-      color: "white",
-      padding: "10px 18px",
-      border: "none",
-      borderRadius: "5px",
-      cursor: "pointer",
-      fontWeight: "bold",
-    },
-
-    cancelButton: {
-      background: "#64748b",
-      color: "white",
-      padding: "10px 18px",
-      border: "none",
-      borderRadius: "5px",
-      cursor: "pointer",
-    },
-
-    tableContainer: {
-      width: "100%",
-      overflowX: "auto",
-      borderRadius: "8px",
-      boxShadow: "0 3px 10px rgba(0,0,0,0.08)",
-      background: "#ffffff",
-    },
-
-    table: {
-      width: "100%",
-      minWidth: "1050px",
-      borderCollapse: "collapse",
-      background: "white",
-    },
-
-    th: {
-      background: "#17365d",
-      color: "white",
-      padding: "12px",
-      border: "1px solid #cbd5e1",
-      textAlign: "left",
-      whiteSpace: "nowrap",
-    },
-
-    td: {
-      padding: "11px",
-      border: "1px solid #cbd5e1",
-      textAlign: "left",
-      verticalAlign: "middle",
-    },
-
-    editButton: {
-      background: "#f0ad4e",
-      color: "#222",
-      border: "none",
-      borderRadius: "4px",
-      padding: "7px 12px",
-      marginRight: "6px",
-      marginBottom: "4px",
-      cursor: "pointer",
-    },
-
-    deleteButton: {
-      background: "#dc3545",
-      color: "white",
-      border: "none",
-      borderRadius: "4px",
-      padding: "7px 12px",
-      cursor: "pointer",
-    },
-
-    message: {
-      padding: "10px",
-      marginBottom: "15px",
-      background: "#f1f5f9",
-      border: "1px solid #cbd5e1",
-      borderRadius: "5px",
-      overflowWrap: "anywhere",
-    },
-
-    emptyMessage: {
-      textAlign: "center",
-      padding: "20px",
-      color: "#64748b",
-    },
-  };
+ 
 
   return (
-    <div style={styles.page}>
-      <h2 style={styles.heading}>Shipment Management</h2>
+    <div className="page">
+      <h2 className="heading">Shipment Management</h2>
 
       {/* Message */}
       {message && (
-        <div style={styles.message}>
+        <div className="message">
           {message}
         </div>
       )}
@@ -370,7 +222,7 @@ function Shipments() {
         <button
           type="button"
           onClick={handleShowForm}
-          style={styles.addButton}
+          className="add-button"
         >
           + Create Shipment
         </button>
@@ -379,20 +231,20 @@ function Shipments() {
       {/* Create and Update Form */}
       {showForm && (
         <form
-          style={styles.form}
+          className="form"
           onSubmit={
             editingShipmentId
               ? handleUpdateShipment
               : handleCreateShipment
           }
         >
-          <h3 style={styles.heading}>
+          <h3 className="heading">
             {editingShipmentId
               ? "Update Shipment"
               : "Create Shipment"}
           </h3>
 
-          <label style={styles.label}>
+          <label className="label">
             Tracking Number
           </label>
           <input
@@ -401,10 +253,10 @@ function Shipments() {
             onChange={(e) => setTrackingNumber(e.target.value)}
             placeholder="Enter tracking number"
             required
-            style={styles.input}
+            className="input"
           />
 
-          <label style={styles.label}>
+          <label className="label">
             Shipment ID
           </label>
           <input
@@ -413,10 +265,10 @@ function Shipments() {
             onChange={(e) => setShipmentId(e.target.value)}
             placeholder="Enter shipment ID"
             required
-            style={styles.input}
+            className="input"
           />
 
-          <label style={styles.label}>
+          <label className="label">
             Sender Name
           </label>
           <input
@@ -425,10 +277,10 @@ function Shipments() {
             onChange={(e) => setSenderName(e.target.value)}
             placeholder="Enter sender name"
             required
-            style={styles.input}
+            className="input"
           />
 
-          <label style={styles.label}>
+          <label className="label">
             Receiver Name
           </label>
           <input
@@ -437,10 +289,10 @@ function Shipments() {
             onChange={(e) => setReceiverName(e.target.value)}
             placeholder="Enter receiver name"
             required
-            style={styles.input}
+            className="input"
           />
 
-          <label style={styles.label}>
+          <label className="label">
             Mobile Number
           </label>
           <input
@@ -449,10 +301,10 @@ function Shipments() {
             onChange={(e) => setMobileNumber(e.target.value)}
             placeholder="Enter Receiver Mobile Number"
             required
-            style={styles.input}
+            className="input"
             />
 
-          <label style={styles.label}>
+          <label className="label">
             Source
           </label>
           <input
@@ -461,10 +313,10 @@ function Shipments() {
             onChange={(e) => setSource(e.target.value)}
             placeholder="Enter source"
             required
-            style={styles.input}
+            className="input"
           />
 
-          <label style={styles.label}>
+          <label className="label">
             Destination
           </label>
           <input
@@ -473,17 +325,17 @@ function Shipments() {
             onChange={(e) => setDestination(e.target.value)}
             placeholder="Enter destination"
             required
-            style={styles.input}
+            className="input"
           />
 
-          <label style={styles.label}>
+          <label className="label">
             Status
           </label>
           <select
             value={status}
             onChange={(e) => setStatus(e.target.value)}
             required
-            style={styles.input}
+            className="input"
           >
             <option value="">Select status</option>
             <option value="Pending">Pending</option>
@@ -495,10 +347,10 @@ function Shipments() {
             <option value="Delivered">Delivered</option>
           </select>
 
-          <div style={styles.formButtons}>
+          <div className="form-buttons">
             <button
               type="submit"
-              style={styles.saveButton}
+              className="save-button"
             >
               {editingShipmentId
                 ? "Update Shipment"
@@ -508,7 +360,7 @@ function Shipments() {
             <button
               type="button"
               onClick={handleCancel}
-              style={styles.cancelButton}
+              className="cancel-button"
             >
               Cancel
             </button>
@@ -518,71 +370,71 @@ function Shipments() {
 
       {/* Shipment Table */}
       {shipments.length === 0 ? (
-        <div style={styles.emptyMessage}>
+        <div className="empty-message">
           No shipments found.
         </div>
       ) : (
-        <div style={styles.tableContainer}>
-          <table style={styles.table}>
+        <div className="table-container">
+          <table className="table">
             <thead>
               <tr>
-                <th style={styles.th}>ID</th>
-                <th style={styles.th}>Tracking Number</th>
-                <th style={styles.th}>Shipment ID</th>
-                <th style={styles.th}>Sender</th>
-                <th style={styles.th}>Receiver</th>
-                <th style={styles.th}>Mobile Number</th>
-                <th style={styles.th}>Source</th>
-                <th style={styles.th}>Destination</th>
-                <th style={styles.th}>Status</th>
-                <th style={styles.th}>Actions</th>
+                <th className="th">ID</th>
+                <th className="th">Tracking Number</th>
+                <th className="th">Shipment ID</th>
+                <th className="th">Sender</th>
+                <th className="th">Receiver</th>
+                <th className="th">Mobile Number</th>
+                <th className="th">Source</th>
+                <th className="th">Destination</th>
+                <th className="th">Status</th>
+                <th className="th">Actions</th>
               </tr>
             </thead>
 
             <tbody>
               {shipments.map((shipment) => (
                 <tr key={shipment.id}>
-                  <td style={styles.td}>
+                  <td className="td">
                     {shipment.id}
                   </td>
 
-                  <td style={styles.td}>
+                  <td className="td">
                     {shipment.trackingNumber}
                   </td>
 
-                  <td style={styles.td}>
+                  <td className="td">
                     {shipment.shipmentId}
                   </td>
 
-                  <td style={styles.td}>
+                  <td className="td">
                     {shipment.senderName}
                   </td>
 
-                  <td style={styles.td}>
+                  <td className="td">
                     {shipment.receiverName}
                   </td>
 
-                  <td style={styles.td}>
+                  <td className="td">
                     {shipment.mobileNumber}
                     </td>
 
-                  <td style={styles.td}>
+                  <td className="td">
                     {shipment.source}
                   </td>
 
-                  <td style={styles.td}>
+                  <td className="td">
                     {shipment.destination}
                   </td>
 
-                  <td style={styles.td}>
+                  <td className="td">
                     {shipment.status}
                   </td>
 
-                  <td style={styles.td}>
+                  <td className="td">
                     <button
                       type="button"
                       onClick={() => handleEditShipment(shipment)}
-                      style={styles.editButton}
+                      className="edit-button"
                     >
                       Edit
                     </button>
@@ -592,7 +444,7 @@ function Shipments() {
                       onClick={() =>
                         handleDeleteShipment(shipment.id)
                       }
-                      style={styles.deleteButton}
+                      className="delete-button"
                     >
                       Delete
                     </button>

@@ -240,128 +240,13 @@ function Warehouses() {
     setMessage("");
   }
 
-  const styles = {
-    page: {
-      padding: "25px",
-      fontFamily: "Arial, sans-serif",
-      color: "#1f2937",
-    },
-    heading: {
-      textAlign: "center",
-      marginBottom: "25px",
-      color: "#17365d",
-    },
-    addButton: {
-      background: "#17365d",
-      color: "white",
-      padding: "10px 18px",
-      border: "none",
-      borderRadius: "6px",
-      cursor: "pointer",
-      marginBottom: "20px",
-    },
-    form: {
-      maxWidth: "600px",
-      margin: "0 auto 25px",
-      padding: "22px",
-      border: "1px solid #cbd5e1",
-      borderRadius: "10px",
-      boxShadow: "0 4px 12px rgba(0,0,0,0.10)",
-      background: "#ffffff",
-    },
-    label: {
-      display: "block",
-      fontWeight: "bold",
-      marginBottom: "6px",
-      marginTop: "12px",
-    },
-    input: {
-      width: "100%",
-      boxSizing: "border-box",
-      padding: "10px",
-      border: "1px solid #94a3b8",
-      borderRadius: "5px",
-      fontSize: "14px",
-    },
-    formButtons: {
-      display: "flex",
-      gap: "10px",
-      marginTop: "20px",
-    },
-    saveButton: {
-      background: "#198754",
-      color: "white",
-      padding: "10px 18px",
-      border: "none",
-      borderRadius: "5px",
-      cursor: "pointer",
-    },
-    cancelButton: {
-      background: "#64748b",
-      color: "white",
-      padding: "10px 18px",
-      border: "none",
-      borderRadius: "5px",
-      cursor: "pointer",
-    },
-    tableContainer: {
-      width: "100%",
-      overflowX: "auto",
-      borderRadius: "8px",
-      boxShadow: "0 3px 10px rgba(0,0,0,0.08)",
-    },
-    table: {
-      width: "100%",
-      borderCollapse: "collapse",
-      background: "white",
-      minWidth: "850px",
-    },
-    th: {
-      background: "#17365d",
-      color: "white",
-      padding: "12px",
-      border: "1px solid #cbd5e1",
-      textAlign: "left",
-      whiteSpace: "nowrap",
-    },
-    td: {
-      padding: "11px",
-      border: "1px solid #cbd5e1",
-      textAlign: "left",
-    },
-    editButton: {
-      background: "#f0ad4e",
-      color: "#222",
-      border: "none",
-      borderRadius: "4px",
-      padding: "7px 12px",
-      marginRight: "6px",
-      cursor: "pointer",
-    },
-    deleteButton: {
-      background: "#dc3545",
-      color: "white",
-      border: "none",
-      borderRadius: "4px",
-      padding: "7px 12px",
-      cursor: "pointer",
-    },
-    message: {
-      padding: "10px",
-      marginBottom: "15px",
-      background: "#f1f5f9",
-      border: "1px solid #cbd5e1",
-      borderRadius: "5px",
-      overflowWrap: "anywhere",
-    },
-  };
-
+ 
   return (
-    <div style={styles.page}>
-      <h2 style={styles.heading}>Warehouse Management</h2>
+    <div className="page">
+      <h2 className="heading">Warehouse Management</h2>
 
       {message && (
-        <div style={styles.message}>
+        <div className="message">
           {message}
         </div>
       )}
@@ -369,7 +254,7 @@ function Warehouses() {
       {!showForm && (
         <button
           type="button"
-          style={styles.addButton}
+          className="add-button"
           onClick={handleShowForm}
         >
           + Create Warehouse
@@ -378,7 +263,7 @@ function Warehouses() {
 
       {showForm && (
         <form
-          style={styles.form}
+          className="form"
           onSubmit={
             editingWarehouseId
               ? handleUpdateWarehouse
@@ -391,10 +276,10 @@ function Warehouses() {
               : "Create Warehouse"}
           </h3>
 
-          <label style={styles.label}>Shipment</label>
+          <label className="label">Shipment</label>
 
           <select
-            style={styles.input}
+            className="input"
             value={shipmentId}
             onChange={(event) => setShipmentId(event.target.value)}
             required
@@ -424,10 +309,10 @@ function Warehouses() {
             </small>
           )}
 
-          <label style={styles.label}>Warehouse Name</label>
+          <label className="label">Warehouse Name</label>
           <input
             type="text"
-            style={styles.input}
+            className="input"
             value={warehouseName}
             onChange={(event) =>
               setWarehouseName(event.target.value)
@@ -436,20 +321,20 @@ function Warehouses() {
             required
           />
 
-          <label style={styles.label}>Location</label>
+          <label className="label">Location</label>
           <input
             type="text"
-            style={styles.input}
+            className="input"
             value={location}
             onChange={(event) => setLocation(event.target.value)}
             placeholder="Enter warehouse location"
             required
           />
 
-          <label style={styles.label}>Manager Name</label>
+          <label className="label">Manager Name</label>
           <input
             type="text"
-            style={styles.input}
+            className="input"
             value={managerName}
             onChange={(event) =>
               setManagerName(event.target.value)
@@ -458,10 +343,10 @@ function Warehouses() {
             required
           />
 
-          <label style={styles.label}>Contact Number</label>
+          <label className="label">Contact Number</label>
           <input
             type="tel"
-            style={styles.input}
+            className="input"
             value={contactNumber}
             onChange={(event) =>
               setContactNumber(event.target.value)
@@ -470,14 +355,14 @@ function Warehouses() {
             required
           />
 
-          <div style={styles.formButtons}>
-            <button type="submit" style={styles.saveButton}>
+          <div className="form-buttons">
+            <button type="submit" className="save-button">
               {editingWarehouseId ? "Update Warehouse" : "Create Warehouse"}
             </button>
 
             <button
               type="button"
-              style={styles.cancelButton}
+              className="cancel-button"
               onClick={handleCancel}
             >
               Cancel
@@ -486,18 +371,18 @@ function Warehouses() {
         </form>
       )}
 
-      <div style={styles.tableContainer}>
-        <table style={styles.table}>
+      <div className="table-container">
+        <table className="table">
           <thead>
             <tr>
-              <th style={styles.th}>Warehouse ID</th>
-              <th style={styles.th}>Shipment ID</th>
-              <th style={styles.th}>Tracking Number</th>
-              <th style={styles.th}>Warehouse Name</th>
-              <th style={styles.th}>Location</th>
-              <th style={styles.th}>Manager Name</th>
-              <th style={styles.th}>Contact Number</th>
-              <th style={styles.th}>Actions</th>
+              <th className="th">Warehouse ID</th>
+              <th className="th">Shipment ID</th>
+              <th className="th">Tracking Number</th>
+              <th className="th">Warehouse Name</th>
+              <th className="th">Location</th>
+              <th className="th">Manager Name</th>
+              <th className="th">Contact Number</th>
+              <th className="th">Actions</th>
             </tr>
           </thead>
 
@@ -505,7 +390,7 @@ function Warehouses() {
             {warehouses.length === 0 ? (
               <tr>
                 <td
-                  style={styles.td}
+                  className="td"
                   colSpan="8"
                 >
                   No warehouses found.
@@ -514,40 +399,40 @@ function Warehouses() {
             ) : (
               warehouses.map((warehouse) => (
                 <tr key={warehouse.id}>
-                  <td style={styles.td}>
+                  <td className="td">
                     {warehouse.id}
                   </td>
 
-                  <td style={styles.td}>
+                  <td className="td">
                     {warehouse.shipment?.shipmentId ||
                       warehouse.shipment?.id ||
                       "-"}
                   </td>
 
-                  <td style={styles.td}>
+                  <td className="td">
                     {warehouse.shipment?.trackingNumber || "-"}
                   </td>
 
-                  <td style={styles.td}>
+                  <td className="td">
                     {warehouse.warehouseName}
                   </td>
 
-                  <td style={styles.td}>
+                  <td className="td">
                     {warehouse.location}
                   </td>
 
-                  <td style={styles.td}>
+                  <td className="td">
                     {warehouse.managerName}
                   </td>
 
-                  <td style={styles.td}>
+                  <td className="td">
                     {warehouse.contactNumber}
                   </td>
 
-                  <td style={styles.td}>
+                  <td className="td">
                     <button
                       type="button"
-                      style={styles.editButton}
+                      className="edit-button"
                       onClick={() => handleEditWarehouse(warehouse)}
                     >
                       Edit
@@ -555,7 +440,7 @@ function Warehouses() {
 
                     <button
                       type="button"
-                      style={styles.deleteButton}
+                      className="delete-button"
                       onClick={() =>
                         handleDeleteWarehouse(warehouse.id)
                       }
