@@ -234,7 +234,7 @@ function Deliveries() {
 
   return (
     <div className="page">
-      <h2 className="headind">Delivery Management</h2>
+      <h2 className="heading">Delivery Management</h2>
 
       {/* Message */}
       {message && (
@@ -248,7 +248,7 @@ function Deliveries() {
         <button
           type="button"
           onClick={handleShowForm}
-          className="add.button"
+          className="add-button"
         >
           + Create Delivery
         </button>
@@ -298,7 +298,7 @@ function Deliveries() {
             </p>
           )}
 
-          <label className="labe;">
+          <label className="label">
             Delivery Person
           </label>
           <input
@@ -310,7 +310,7 @@ function Deliveries() {
             className="input"
           />
 
-          <label style={styles.label}>
+          <label className="label">
             Delivery Date
           </label>
           <input
@@ -342,7 +342,7 @@ function Deliveries() {
           <div className="form-buttons">
             <button
               type="submit"
-              className="save.button"
+              className="save-button"
               disabled={shipments.length === 0}
             >
               {editingDeliveryId
@@ -367,7 +367,7 @@ function Deliveries() {
           No deliveries found.
         </div>
       ) : (
-        <div style={styles.tableContainer}>
+        <div className="table-container">
           <table className="table">
             <thead>
               <tr>
