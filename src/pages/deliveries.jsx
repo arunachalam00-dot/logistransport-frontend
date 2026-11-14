@@ -1,6 +1,5 @@
 
 import { useEffect, useState } from "react";
-import '../index.css';
 
 function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
