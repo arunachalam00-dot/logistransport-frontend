@@ -104,7 +104,7 @@ function ShipmentSearch() {
         Shipment Search
       </h1>
 
-      <div id="shipment-box">
+      <div id="shipment-box1">
         <input
           type="text"
           placeholder="Enter Shipment ID (e.g. SID001)"
@@ -113,7 +113,7 @@ function ShipmentSearch() {
           onKeyDown={(e) => {
             if (e.key === "Enter") searchShipment();
           }}
-         id="shipment-boxx"
+         id="shipment-box2"
         />
 
         <button
@@ -136,7 +136,7 @@ function ShipmentSearch() {
 
       {data && (
         <div style={{ display: "grid", gap: "20px", marginTop: "25px" }}>
-          <section style={cardStyle}>
+          <section className="card-style">
             <h2 id="h2">
               Shipment Details
             </h2>
@@ -150,7 +150,7 @@ function ShipmentSearch() {
             <Detail label="Status" value={shipment?.status} />
           </section>
 
-          <section id="card-style">
+          <section className="card-style">
             <h2 id="h2">
               Delivery Partner
             </h2>
@@ -162,7 +162,7 @@ function ShipmentSearch() {
             <Detail label="Delivery Status" value={delivery?.status} />
           </section>
 
-          <section style={cardStyle}>
+          <section className="card-style">
             <h2 id="h2">Warehouse</h2>
             <Detail
               label="Warehouse Name"

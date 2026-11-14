@@ -1,11 +1,6 @@
 html{
-    /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrXfOJVMWBG8AFcazRPXReHdYtavtfOuVXfS2Q5bXsrw&s=10"); */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+  background-color: #ffffff;
 }
-
 /*..................LOGIN...........................................................*/
 #login{
   margin-top:100px;
@@ -395,7 +390,6 @@ html{
       background: #ffffff;
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-      
     }
 
     #shipment-heading {
@@ -477,7 +471,7 @@ html{
 
     /*.............................SHIPMENT SEARCH................................................*/ 
 
-    #card-style {
+    .card-style {
     background: #ffffff;
     border: 1px solid #cbd5e1;
     border-radius: 10px;
@@ -510,14 +504,14 @@ html{
     margin-bottom: 22px;
   }
 
-  #shipment-box{
+  #shipment-box1{
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
     margin-bottom: 18px;
   }
 
-  #shipment-boxx{
+  #shipment-box2{
     flex: 1 1 300px;
     min-width: 0;
     padding: 12px;
